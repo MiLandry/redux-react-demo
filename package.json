@@ -1,0 +1,22 @@
+{
+  "name": "redux-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hamsterofdark/redux-demo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hamsterofdark/redux-demo/issues"
+  },
+  "homepage": "https://github.com/hamsterofdark/redux-demo#readme",
+  "dependencies": {
+    "redux": "^3.6.0"
+  }
+}
