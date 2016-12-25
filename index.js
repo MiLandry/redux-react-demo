@@ -1,7 +1,5 @@
-// import redux from 'redux';
-// console.log(redux);
-
-function decrement () {
+document.write("hello webpack mike");
+window.decrement = function () {
   var value = document.getElementById("theValue").innerHTML;
   console.log(value);
   value -- ;
@@ -10,7 +8,7 @@ function decrement () {
 }
 
 
-function increment () {
+window.increment = function increment () {
   var value = document.getElementById("theValue").innerHTML;
   console.log(value);
   value ++ ;
