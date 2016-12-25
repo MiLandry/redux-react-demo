@@ -1,5 +1,5 @@
-import redux from 'redux';
-console.log(redux);
+// import redux from 'redux';
+// console.log(redux);
 
 function decrement () {
   var value = document.getElementById("theValue").innerHTML;
