@@ -14,4 +14,4 @@ start the project
 `npm start`
 
 then browse to
-http://localhost:8080/
+http://localhost:2222/
