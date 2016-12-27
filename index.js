@@ -1,23 +1,5 @@
 import expect from 'expect';
 
-document.write("hello webpack mike");
-window.decrement = function () {
-  var value = document.getElementById("theValue").innerHTML;
-  console.log(value);
-  value -- ;
-  document.getElementById("theValue").innerHTML = value
-
-}
-
-
-window.increment = function increment () {
-  var value = document.getElementById("theValue").innerHTML;
-  console.log(value);
-  value ++ ;
-  document.getElementById("theValue").innerHTML = value
-
-}
-
 const counter = (state = 0, action) => {
   switch (action.type) {
     case 'INCREMENT' :
@@ -26,6 +8,29 @@ const counter = (state = 0, action) => {
     default:
     return state;
   }
+}
+
+import { createStore } from 'redux';
+const store = createStore(counter);
+
+console.log(store.getState());
+
+store.subscribe(() => {
+  document.getElementById("theValue").innerHTML = store.getState();
+
+});
+
+
+document.write("hello webpack mike");
+window.decrement = function () {
+  store.dispatch({ type: 'DECREMENT'});
+
+}
+
+
+window.increment = function increment () {
+  store.dispatch({ type: 'INCREMENT'});
+
 }
 
 
