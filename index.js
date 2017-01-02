@@ -1,4 +1,7 @@
 import expect from 'expect';
+import { createStore } from 'redux';
+import ReactDOM from 'react-dom';
+import React from 'react';
 
 const counter = (state = 0, action) => {
   switch (action.type) {
@@ -10,30 +13,42 @@ const counter = (state = 0, action) => {
   }
 }
 
-import { createStore } from 'redux';
 const store = createStore(counter);
 
 console.log(store.getState());
 
+const Counter = ({
+  value,
+  onIncrement,
+  onDecrement}) => (
+      <div>
+        <h1>{value}</h1>
+        <button onClick={onDecrement()}>-</button>
+        <button onClick={onIncrement()}>+</button>
+      </div>
+    );
+
+
+
 const render = () => {
-  document.getElementById("theValue").innerHTML = store.getState();
+  ReactDOM.render(
+    <Counter
+      value = {store.getState()}
+      onDecrement={() => {store.dispatch({ type: 'DECREMENT'})}}
+      onIncrement={() => {store.dispatch({ type: 'INCREMENT'})}}
+     />,
+    document.getElementById('root')
+    );
 
 };
 
-store.subscribe(render); 
+//store.subscribe(render);
 
 
 document.write("hello webpack mike");
-window.decrement = function () {
-  store.dispatch({ type: 'DECREMENT'});
 
-}
-
-
-window.increment = function increment () {
-  store.dispatch({ type: 'INCREMENT'});
-
-}
 
 
 expect(counter(0, { type: 'INCREMENT' } )).toEqual(1);
+
+render();
