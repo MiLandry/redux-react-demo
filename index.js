@@ -15,10 +15,12 @@ const store = createStore(counter);
 
 console.log(store.getState());
 
-store.subscribe(() => {
+const render = () => {
   document.getElementById("theValue").innerHTML = store.getState();
 
-});
+};
+
+store.subscribe(render); 
 
 
 document.write("hello webpack mike");

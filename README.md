@@ -15,3 +15,5 @@ start the project
 
 then browse to
 http://localhost:2222/
+
+Note that live reload is available
