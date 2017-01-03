@@ -15,7 +15,6 @@ const counter = (state = 0, action) => {
 
 const store = createStore(counter);
 
-console.log(store.getState());
 
 const Counter = ({
   value,
@@ -23,8 +22,8 @@ const Counter = ({
   onDecrement}) => (
       <div>
         <h1>{value}</h1>
-        <button onClick={onDecrement()}>-</button>
-        <button onClick={onIncrement()}>+</button>
+        <button onClick={onDecrement}>-</button>
+        <button onClick={onIncrement}>+</button>
       </div>
     );
 
@@ -42,7 +41,8 @@ const render = () => {
 
 };
 
-//store.subscribe(render);
+store.subscribe(render);
+render();
 
 
 document.write("hello webpack mike");
@@ -50,5 +50,3 @@ document.write("hello webpack mike");
 
 
 expect(counter(0, { type: 'INCREMENT' } )).toEqual(1);
-
-render();
