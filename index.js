@@ -2,6 +2,7 @@ import expect from 'expect';
 import { createStore } from 'redux';
 import ReactDOM from 'react-dom';
 import React from 'react';
+import deepFreeze from 'deep-freeze'
 
 const counter = (state = 0, action) => {
   switch (action.type) {
@@ -40,6 +41,26 @@ const render = () => {
     );
 
 };
+
+const addCounter = (list) => {
+
+  return [...list, 0];
+
+};
+
+const addCounterTest = () => {
+  const listBefore = [];
+  const listAfter = [0];
+
+  deepFreeze(listBefore);
+
+  expect(
+    addCounter(listBefore))
+    .toEqual(listAfter);
+
+}
+
+addCounterTest();
 
 store.subscribe(render);
 render();
