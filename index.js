@@ -48,6 +48,26 @@ const addCounter = (list) => {
 
 };
 
+const removeCounter = (list, index) => {
+  return list
+  .slice(0, index)
+  .concat(list.slice(index + 1));
+
+}
+
+const removeCounterTest = () => {
+  const before = [0,10,20];
+  const after =  [0,20];
+
+  deepFreeze(before);
+
+  expect(
+    removeCounter(before, 1)
+    )
+    .toEqual(after);
+
+}
+
 const addCounterTest = () => {
   const listBefore = [];
   const listAfter = [0];
@@ -55,12 +75,14 @@ const addCounterTest = () => {
   deepFreeze(listBefore);
 
   expect(
-    addCounter(listBefore))
+    addCounter(listBefore)
+    )
     .toEqual(listAfter);
 
 }
 
 addCounterTest();
+removeCounterTest();
 
 store.subscribe(render);
 render();
