@@ -56,6 +56,96 @@ const removeCounter = (list, index) => {
 
 }
 
+const incrementCounter = (list, index) => {
+  return [
+    ...list.slice(0, index),
+    list[index] + 1,
+    ...list.slice(index + 1)
+  ];
+}
+
+const toggleTodo = (todo) => {
+  return Object.assign({}, todo, {
+    completed: !todo.completed
+  })
+
+}
+
+const todosReducer = (state=[], action) => {
+  switch (action.type) {
+    case 'ADD_TODO' :
+    return [...state, 
+      {
+        id: action.id,
+        text: action.text,
+        completed: false
+      }
+    ];
+    default:
+      return state;
+  }
+}
+/******************************************/
+
+const testAddTodo = () => {
+  const before = [];
+
+  const action = {
+    type: 'ADD_TODO',
+    id: 0,
+    text: 'test'
+  }
+
+  const after = [
+    {
+      id: 0,
+      text: 'test',
+      completed: false
+    }
+  ];
+
+  deepFreeze(before);
+  deepFreeze(action);
+
+  expect (
+    todosReducer(before, action)
+    )
+    .toEqual(after);
+};
+
+testAddTodo();
+
+const toggleTodoTest = () => {
+  const before = {
+    id: 0,
+    text: 'test',
+    completed: false 
+  };
+  const after = {
+    id: 0,
+    text: 'test',
+    completed: true 
+  };
+  expect (
+    toggleTodo(before)
+    )
+    .toEqual(after);
+}
+
+toggleTodoTest();
+
+const testIncrementCounter = () => {
+  const before = [0,10,20];
+  const after =  [0,11,20];
+
+  deepFreeze(before);
+
+  expect(
+    incrementCounter(before, 1)
+    )
+    .toEqual(after);
+}
+
 const removeCounterTest = () => {
   const before = [0,10,20];
   const after =  [0,20];
@@ -82,8 +172,6 @@ const addCounterTest = () => {
 
 }
 
-addCounterTest();
-removeCounterTest();
 
 store.subscribe(render);
 render();
@@ -94,3 +182,7 @@ document.write("hello webpack mike");
 
 
 expect(counter(0, { type: 'INCREMENT' } )).toEqual(1);
+
+addCounterTest();
+removeCounterTest();
+testIncrementCounter();
