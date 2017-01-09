@@ -145,5 +145,5 @@ expect(counter(0, { type: 'INCREMENT' } )).toEqual(1);
 addCounterTest();
 removeCounterTest();
 testIncrementCounter();
-reducers.testAddTodo();
+reducers.tests();
 console.log("all tests pass")
