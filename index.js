@@ -3,6 +3,7 @@ import { createStore } from 'redux';
 import ReactDOM from 'react-dom';
 import React from 'react';
 import deepFreeze from 'deep-freeze'
+import * as reducers from './reducers/reducers';
 
 const counter = (state = 0, action) => {
   switch (action.type) {
@@ -71,49 +72,7 @@ const toggleTodo = (todo) => {
 
 }
 
-const todosReducer = (state=[], action) => {
-  switch (action.type) {
-    case 'ADD_TODO' :
-    return [...state, 
-      {
-        id: action.id,
-        text: action.text,
-        completed: false
-      }
-    ];
-    default:
-      return state;
-  }
-}
-/******************************************/
 
-const testAddTodo = () => {
-  const before = [];
-
-  const action = {
-    type: 'ADD_TODO',
-    id: 0,
-    text: 'test'
-  }
-
-  const after = [
-    {
-      id: 0,
-      text: 'test',
-      completed: false
-    }
-  ];
-
-  deepFreeze(before);
-  deepFreeze(action);
-
-  expect (
-    todosReducer(before, action)
-    )
-    .toEqual(after);
-};
-
-testAddTodo();
 
 const toggleTodoTest = () => {
   const before = {
@@ -186,3 +145,5 @@ expect(counter(0, { type: 'INCREMENT' } )).toEqual(1);
 addCounterTest();
 removeCounterTest();
 testIncrementCounter();
+reducers.testAddTodo();
+console.log("all tests pass")
