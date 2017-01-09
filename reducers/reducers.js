@@ -1,6 +1,25 @@
 import deepFreeze from 'deep-freeze'
 import expect from 'expect';
 
+export const todoReducer = (state=[], action) => {
+  switch (action.type) {
+    case 'TOGGLE_TODO' :
+      return state.map ( todo => {
+        if (todo.id !== action.id) {
+          return todo;
+        }
+        return {
+          ...todo,
+          completed: !todo.completed
+        }
+
+      })
+    default:
+      return state;
+  }
+}
+
+
 
 export const todosReducer = (state=[], action) => {
   switch (action.type) {
@@ -12,18 +31,7 @@ export const todosReducer = (state=[], action) => {
           completed: false
         }
       ];
-    case 'TOGGLE_TODO' :
-      return state.map ( todo => {
-        if (todo.id !== action.id) {
-          return todo;
-        }
 
-        return {
-          ...todo,
-          completed: !todo.completed
-        }
-
-      })
     default:
       return state;
   }
@@ -87,7 +95,7 @@ const testToggleTodo = () => {
   deepFreeze(action);
 
   expect (
-    todosReducer(before, action)
+    todoReducer(before, action)
     )
     .toEqual(after);
 };
