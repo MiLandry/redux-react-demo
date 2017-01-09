@@ -1,10 +1,18 @@
 import deepFreeze from 'deep-freeze'
 import expect from 'expect';
 
+export const appReducer = (state={}, action) => {
+  return {
+    todos: todosReducer(state.todos, action),
+    visibilityFilter: visibilityFilterReducer(state.visibilityFilter, action)
+  }
+
+}
+
 export const todosReducer = (state=[], action) => {
   switch (action.type) {
     case 'ADD_TODO' :
-        [...state,
+        return [...state,
         todoReducer(undefined, action)
       ];
     case 'TOGGLE_TODO' :
@@ -14,7 +22,7 @@ export const todosReducer = (state=[], action) => {
   }
 }
 
-export const todoReducer = (state, action) => {
+export const todoReducer = (state={}, action) => {
   switch (action.type) {
     case 'ADD_TODO' :
       return {
@@ -39,11 +47,19 @@ export const todoReducer = (state, action) => {
 
 
 
+const visibilityFilterReducer = (state='SHOW_ALL', action) => {
+  switch (action.type) {
+    case ('SET_VISIBILITY_FILTER') :
+      return action.visibilityFilter;
+    default :
+      return state;
+  }
+};
 
 
 
+****************Tests**************************/
 
-/****************Tests**************************/
 
 const testAddTodo = () => {
   const before = [];
@@ -70,7 +86,6 @@ const testAddTodo = () => {
     )
     .toEqual(after);
 };
-
 const testToggleTodo = () => {
   const before = [
     {
@@ -104,6 +119,7 @@ const testToggleTodo = () => {
 
 export const tests = () => {
   testToggleTodo();
+  testAddTodo();
 }
 
 
