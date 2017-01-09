@@ -1,37 +1,37 @@
 import deepFreeze from 'deep-freeze'
 import expect from 'expect';
 
-export const todoReducer = (state=[], action) => {
+export const todosReducer = (state=[], action) => {
   switch (action.type) {
+    case 'ADD_TODO' :
+        [...state,
+        todoReducer(undefined, action)
+      ];
     case 'TOGGLE_TODO' :
-      return state.map ( todo => {
-        if (todo.id !== action.id) {
-          return todo;
-        }
-        return {
-          ...todo,
-          completed: !todo.completed
-        }
-
-      })
+      return state.map( t => todoReducer(t, action));
     default:
       return state;
   }
 }
 
-
-
-export const todosReducer = (state=[], action) => {
+export const todoReducer = (state, action) => {
   switch (action.type) {
     case 'ADD_TODO' :
-      return [...state, 
-        {
+      return {
           id: action.id,
           text: action.text,
           completed: false
         }
-      ];
+    case 'TOGGLE_TODO' :
+      if (state.id !== action.id)
+      {
+        return state;
+      }
 
+      return{
+        ...state,
+        completed : !state.completed
+      };
     default:
       return state;
   }
@@ -41,7 +41,9 @@ export const todosReducer = (state=[], action) => {
 
 
 
-/******************************************/
+
+
+/****************Tests**************************/
 
 const testAddTodo = () => {
   const before = [];
@@ -70,7 +72,7 @@ const testAddTodo = () => {
 };
 
 const testToggleTodo = () => {
-  const before = [    
+  const before = [
     {
       id: 0,
       text: 'test',
@@ -95,14 +97,13 @@ const testToggleTodo = () => {
   deepFreeze(action);
 
   expect (
-    todoReducer(before, action)
+     todosReducer(before, action)
     )
     .toEqual(after);
 };
 
 export const tests = () => {
   testToggleTodo();
-  testAddTodo;
 }
 
 
