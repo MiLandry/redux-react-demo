@@ -1,15 +1,10 @@
 import deepFreeze from 'deep-freeze'
 import expect from 'expect';
+import {combineReducers} from 'redux';
 
-export const appReducer = (state={}, action) => {
-  return {
-    todos: todosReducer(state.todos, action),
-    visibilityFilter: visibilityFilterReducer(state.visibilityFilter, action)
-  }
 
-}
 
-export const todosReducer = (state=[], action) => {
+export const todos = (state=[], action) => {
   switch (action.type) {
     case 'ADD_TODO' :
         return [...state,
@@ -47,7 +42,7 @@ export const todoReducer = (state={}, action) => {
 
 
 
-const visibilityFilterReducer = (state='SHOW_ALL', action) => {
+const visibilityFilter = (state='SHOW_ALL', action) => {
   switch (action.type) {
     case ('SET_VISIBILITY_FILTER') :
       return action.visibilityFilter;
@@ -56,7 +51,10 @@ const visibilityFilterReducer = (state='SHOW_ALL', action) => {
   }
 };
 
-
+export const appReducer = combineReducers({
+  todos,
+  visibilityFilter
+})
 
 /****************Tests**************************/
 
@@ -82,7 +80,7 @@ const testAddTodo = () => {
   deepFreeze(action);
 
   expect (
-    todosReducer(before, action)
+    todos(before, action)
     )
     .toEqual(after);
 };
@@ -112,7 +110,7 @@ const testToggleTodo = () => {
   deepFreeze(action);
 
   expect (
-     todosReducer(before, action)
+     todos(before, action)
     )
     .toEqual(after);
 };

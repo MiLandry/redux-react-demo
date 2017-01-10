@@ -2,7 +2,7 @@ import expect from 'expect';
 import { createStore } from 'redux';
 import ReactDOM from 'react-dom';
 import React from 'react';
-import deepFreeze from 'deep-freeze'
+import deepFreeze from 'deep-freeze';
 import * as reducers from './reducers/reducers';
 
 const counter = (state = 0, action) => {
