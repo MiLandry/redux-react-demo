@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import deepFreeze from 'deep-freeze';
 import * as reducers from './reducers/reducers';
+import TodoApp from './components/TodoApp'
 
 const counter = (state = 0, action) => {
   switch (action.type) {
@@ -33,11 +34,7 @@ const Counter = ({
 
 const render = () => {
   ReactDOM.render(
-    <Counter
-      value = {store.getState()}
-      onDecrement={() => {store.dispatch({ type: 'DECREMENT'})}}
-      onIncrement={() => {store.dispatch({ type: 'INCREMENT'})}}
-     />,
+    <TodoApp />,
     document.getElementById('root')
     );
 
