@@ -58,7 +58,7 @@ const visibilityFilterReducer = (state='SHOW_ALL', action) => {
 
 
 
-****************Tests**************************/
+/****************Tests**************************/
 
 
 const testAddTodo = () => {
