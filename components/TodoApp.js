@@ -20,9 +20,13 @@ export default class TodoApp extends React.Component {
 
   };
 
-  componentWillReceiveProps() {}
+  onTodoClick (id) {
 
-
+    this.props.store.dispatch({
+      type: 'TOGGLE_TODO',
+      id: id
+    })
+  }
 
   render() {
     return (
@@ -33,13 +37,17 @@ export default class TodoApp extends React.Component {
         }} />
         <button onClick={this.onClickCB} > Click me </button>
         <ul>
-        {this.props.todos.map( todo => 
-          <li key={todo.id}>
-          {todo.text}
+        {this.props.todos.map( todo =>
+          <li
+            key={todo.id}
+            onClick= { () => this.onTodoClick(todo.id) }
+            style = { { textDecoration: (todo.completed===true) ? "line-through" : "" }}
+        >
+        {todo.text}
           </li>
           )}
         </ul>
       </div>
     );
   }
-} 
+}
