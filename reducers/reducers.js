@@ -2,8 +2,6 @@ import deepFreeze from 'deep-freeze'
 import expect from 'expect';
 import {combineReducers} from 'redux';
 
-
-
 export const todos = (state=[], action) => {
   switch (action.type) {
     case 'ADD_TODO' :
@@ -84,6 +82,7 @@ const testAddTodo = () => {
     )
     .toEqual(after);
 };
+
 const testToggleTodo = () => {
   const before = [
     {

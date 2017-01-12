@@ -19,8 +19,16 @@ export default class TodoApp extends React.Component {
   render() {
     return (
       <div>
-        <p>This is the Counter component! The button was clicked { this.state.clicks } times.</p>
+        <p> to do list</p>
+        <button onClick={this.increment} > Click me </button>
+        <ul>
+        {this.props.todos.map( todo => 
+          <li key={todo.id}>
+          {todo.text}
+          </li>
+          )}
+        </ul>
       </div>
     );
   }
-}
+} 
