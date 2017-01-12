@@ -3,24 +3,24 @@ import React from "react";
 export default class TodoApp extends React.Component {
   constructor() {
     super();
-    this.name = "Mike";
-    this.state = {
-      clicks: 0
-    };
-    this.increment = this.increment.bind(this);
+    this.onClickCB = this.onClickCB.bind(this);
   }
 
-  increment() {
-    this.setState({
-      clicks: this.state.clicks + 1
-    });
+  onClickCB() {
+      this.props.store.dispatch({
+        type: 'ADD_TODO',
+        id: 1,
+        text: "Bullshit",
+
+      })
+
   };
 
   render() {
     return (
       <div>
         <p> to do list</p>
-        <button onClick={this.increment} > Click me </button>
+        <button onClick={this.onClickCB} > Click me </button>
         <ul>
         {this.props.todos.map( todo => 
           <li key={todo.id}>

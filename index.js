@@ -7,11 +7,11 @@ import * as reducers from './reducers/reducers';
 import TodoApp from './components/TodoApp'
 
 
-
+const store = createStore(reducers.appReducer);
 
 const render = () => {
   ReactDOM.render(
-    <TodoApp todos={store.getState().todos} />,
+    <TodoApp store={store} todos={store.getState().todos} />,
     document.getElementById('root')
     );
 
@@ -19,7 +19,7 @@ const render = () => {
 
 
 
-const store = createStore(reducers.appReducer)
+
 
 
 store.subscribe(render);
