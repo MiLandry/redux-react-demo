@@ -1,16 +1,19 @@
 import React from "react";
+import store from '../store';
 
 let todoCounter = 1;
 const FilterLink = props => (
   <a href='#'
   onClick={e => {
     e.preventDefault();
-    props.store.dispatch({
+    store.dispatch({
       type: 'SET_VISIBILITY_FILTER',
       visibilityFilter: 'SHOW_ALL'
     })
   }}>All</a>
 );
+
+
 
 export default class TodoApp extends React.Component {
   constructor() {
@@ -21,7 +24,7 @@ export default class TodoApp extends React.Component {
 
 
   onClickCB() {
-      this.props.store.dispatch({
+      store.dispatch({
         type: 'ADD_TODO',
         id: todoCounter,
         text: this.input.value
@@ -33,7 +36,7 @@ export default class TodoApp extends React.Component {
 
   onTodoClick (id) {
 
-    this.props.store.dispatch({
+    store.dispatch({
       type: 'TOGGLE_TODO',
       id: id
     })
