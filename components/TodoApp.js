@@ -45,7 +45,7 @@ export default class TodoApp extends React.Component {
   getVisibleTodos (todos, filter) {
     switch (filter) {
       case "SHOW_ALL":
-        return todos;,
+        return todos;
       case "SHOW_COMPLETED":
         return todos.filter(
           t => t.completed

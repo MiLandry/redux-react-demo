@@ -9,9 +9,7 @@ import store from './store';
 
 const render = () => {
   ReactDOM.render(
-    <TodoApp 
-      todos={store.getState().todos}
-      visibilityFilter={store.getState().visibilityFilter}
+    <TodoApp {...store.getState()}
     />,
     document.getElementById('root')
     );
