@@ -1,6 +1,17 @@
 import React from "react";
 
 let todoCounter = 1;
+const FilterLink = props => (
+  <a href='#'
+  onClick={e => {
+    e.preventDefault();
+    props.store.dispatch({
+      type: 'SET_VISIBILITY_FILTER',
+      visibilityFilter: 'SHOW_ALL'
+    })
+  }}>All</a>
+);
+
 export default class TodoApp extends React.Component {
   constructor() {
     super();
@@ -28,7 +39,9 @@ export default class TodoApp extends React.Component {
     })
   }
 
+
   render() {
+    const store = this.props.store;
     return (
       <div>
         <p> to do list</p>
@@ -47,6 +60,13 @@ export default class TodoApp extends React.Component {
           </li>
           )}
         </ul>
+        <p> Show:
+          <FilterLink
+          visibilityFilter="SHOW_ALL"
+          store={this.props.store}
+          />
+          {this.props.visibilityFilter}
+        </p>
       </div>
     );
   }
