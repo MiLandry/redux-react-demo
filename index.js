@@ -18,13 +18,18 @@ const counter = (state = 0, action) => {
 
 const store = createStore(counter);
 
+const Counter = ({value}) => (
+  <h2>{value}</h2>
+);
+
+
 
 const render = () => {
-
   ReactDOM.render(
-    <div>{store.getState}</div>,
-    document.getElementById('root')
+  <Counter value = {store.getState()}/>,
+  document.getElementById('root')
     );
+
 
 };
 
