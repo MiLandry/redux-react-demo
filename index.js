@@ -18,20 +18,29 @@ const counter = (state = 0, action) => {
 
 const store = createStore(counter);
 
-const Counter = ({value}) => (
-  <h2>{value}</h2>
+const Counter = ({value, onAdd, onSubtract}) => (
+  <div> 
+    <h2>{value}</h2>
+    <button onClick={onAdd}> add </button>
+    <button onClick={onSubtract}> subtract </button>
+  </div>
 );
 
 
 
 const render = () => {
   ReactDOM.render(
-  <Counter value = {store.getState()}/>,
+  <Counter 
+    value = {store.getState()}
+    onAdd= {() => {store.dispatch({type: 'INCREMENT'})}}
+    onSubtract= {() => {store.dispatch({type: 'DECREMENT'})}}
+  />,
   document.getElementById('root')
     );
 
 
 };
+
 
 
 store.subscribe(render);
