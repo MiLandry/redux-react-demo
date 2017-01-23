@@ -1,6 +1,6 @@
 import expect from 'expect';
 import ReactDOM from 'react-dom';
-import React from 'react';
+import React , {Component} from 'react';
 import deepFreeze from 'deep-freeze';
 import { createStore, combineReducers } from 'redux';
 
@@ -99,25 +99,46 @@ const counter = (state = 0, action) => {
   }
 }
 
-const store = createStore(counter);
+const store = createStore(todoApp);
 
-const Counter = ({value, onAdd, onSubtract}) => (
-  <div> 
-    <h2>{value}</h2>
-    <button onClick={onAdd}> add </button>
-    <button onClick={onSubtract}> subtract </button>
-  </div>
-);
+let nextTodoId = 0;
+class TodoApp extends Component {
+  render() {
+    return (
+      <div>
+        <input ref={node => {
+          this.input = node;
+        }} />
+        <button onClick={() => {
+          store.dispatch({
+            type: 'ADD_TODO',
+            text: this.input.value,
+            id: nextTodoId++
+          });
+          this.input.value = '';
+        }}>
+          AddTodo
+          </button>
+          <ul>
+            {this.props.todos.map(todo => 
+              <li key={todo.id}>
+              {todo.text}
+              </li>
+              )}
+          </ul>
+      </div>
+      );
+  }
+}
 
 
 
 const render = () => {
   ReactDOM.render(
-  <Counter 
-    value = {store.getState()}
-    onAdd= {() => {store.dispatch({type: 'INCREMENT'})}}
-    onSubtract= {() => {store.dispatch({type: 'DECREMENT<'})}}
-  />,
+    <TodoApp 
+      todos= {store.getState().todos}
+
+    />,
   document.getElementById('root')
     );
 
