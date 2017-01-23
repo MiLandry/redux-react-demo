@@ -24,7 +24,7 @@ const todos = (state = [], action) => {
         text: action.text,
         completed: false
       }];
-      case 'TOGGLE_TODO' : 
+      case 'TOGGLE_TODO' :
         return state.map(todo => {
           if (action.id !== todo.id) {
             return todo;
@@ -86,24 +86,14 @@ const testToggleTodo = () => {
 
 testToggleTodo();
 
-//ignore everything belo
 
-const counter = (state = 0, action) => {
-  switch (action.type) {
-    case 'INCREMENT' :
-      return state + 1;
-    case 'DECREMENT':
-      return state -1;
-    default:
-      return state;
-  }
-}
 
 const store = createStore(todoApp);
 
 let nextTodoId = 0;
 class TodoApp extends Component {
   render() {
+    // const liStyle =
     return (
       <div>
         <input ref={node => {
@@ -120,8 +110,21 @@ class TodoApp extends Component {
           AddTodo
           </button>
           <ul>
-            {this.props.todos.map(todo => 
-              <li key={todo.id}>
+            {this.props.todos.map(todo =>
+              <li
+                style={
+                  {
+      textDecoration: (todo.completed) ? 'line-through' : ''
+    }
+                }
+                key={todo.id}
+                onClick={() => {
+                  store.dispatch({
+                    type: 'TOGGLE_TODO',
+                    id: todo.id
+                  })
+                }}
+              >
               {todo.text}
               </li>
               )}
@@ -135,7 +138,7 @@ class TodoApp extends Component {
 
 const render = () => {
   ReactDOM.render(
-    <TodoApp 
+    <TodoApp
       todos= {store.getState().todos}
 
     />,
@@ -180,26 +183,6 @@ const testTodos = () => {
 };
 
 testTodos();
-
-const testCounter = () => {
-  const before = 0;
-
-  const action = {
-    type: 'INCREMENT',
-  }
-
-  const after = 1;
-
-  deepFreeze(before);
-  deepFreeze(action);
-
-  expect (
-    counter(before, action)
-    )
-    .toEqual(after);
-};
-
-testCounter();
 
 
 
