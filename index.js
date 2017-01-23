@@ -16,7 +16,7 @@ const visibilityFilter = (state = 'SHOW_ALL', action) => {
 
 }
 
-const todo = (state , action) => {
+const todo = (state = {} , action) => {
   switch (action.type) {
     case 'ADD_TODO' :
       return {
@@ -55,14 +55,47 @@ const todoApp = combineReducers ({
 });
 
 
+const Todo = ({
+    onClick,
+    completed,
+    text
+  }) => (
+    <li
+    style={
+      {
+    textDecoration: (completed) ? 'line-through' : '',
+  }
+    }
+    onClick={onClick}
+  >
+  {text}
+  </li>
+);
 
+const TodoList = ({
+  todos,
+  onTodoClick
+}) => (
+  <ul>
+    {todos.map(todo =>
+    <Todo
+      key={todo.id}
+      {...todo}
+      onClick={() => onTodoClick(todo.id)}
+      />
 
+      )}
+  </ul>
+)
 
 const store = createStore(todoApp);
 
 let nextTodoId = 0;
 class TodoApp extends Component {
   render() {
+    const visibleTodos = this.props.todos.filter(todo => {
+      return ((!todo.completed && this.props.visibilityFilter!=='SHOW_COMPLETED') || (todo.completed && this.props.visibilityFilter!=='SHOW_IN_PROGRESS'))
+    });
 
     return (
       <div>
@@ -79,28 +112,15 @@ class TodoApp extends Component {
         }}>
           AddTodo
           </button>
-          <ul>
-            {this.props.todos.filter(todo => {
-              return ((!todo.completed && this.props.filter!=='SHOW_COMPLETED') || (todo.completed && this.props.filter!=='SHOW_IN_PROGRESS'))
-            }).map(todo =>
-              <li
-                style={
-                  {
-      textDecoration: (todo.completed) ? 'line-through' : '',
-    }
-                }
-                key={todo.id}
-                onClick={() => {
-                  store.dispatch({
-                    type: 'TOGGLE_TODO',
-                    id: todo.id
-                  })
-                }}
-              >
-              {todo.text}
-              </li>
-              )}
-          </ul>
+          <TodoList
+            todos = {visibleTodos}
+            onTodoClick = { (id) => {
+              store.dispatch({
+                type: 'TOGGLE_TODO',
+                id: id
+              })
+            }}
+            />
           <FilterLink text='Show All' filter='SHOW_ALL'  />
           <br />
           <FilterLink text='Show in progress' filter='SHOW_IN_PROGRESS'/>
@@ -129,7 +149,7 @@ const render = () => {
   ReactDOM.render(
     <TodoApp
       todos= {store.getState().todos}
-      filter = {store.getState().visibilityFilter}
+      visibilityFilter = {store.getState().visibilityFilter}
 
     />,
   document.getElementById('root')
