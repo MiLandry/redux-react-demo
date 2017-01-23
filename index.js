@@ -2,9 +2,19 @@ import expect from 'expect';
 import ReactDOM from 'react-dom';
 import React from 'react';
 import deepFreeze from 'deep-freeze';
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 
 
+const visibilityFilter = (state = 'SHOW_ALL', action) => {
+  switch (action.type) {
+    case 'SET_VISIBILITY_FILTER' :
+      return action.filter;
+
+    default:
+      return state;
+  } 
+
+}
 
 const todos = (state = [], action) => {
   switch (action.type) {
@@ -29,33 +39,11 @@ const todos = (state = [], action) => {
   }
 }
 
-const testTodos = () => {
-  const before = [];
+const todoApp = combineReducers ({
+  todos,
+  visibilityFilter
+});
 
-  const action = {
-    type: 'ADD_TODO',
-    id: 0,
-    text: 'learn'
-    
-  }
-
-  const after = [
-  {
-    id: 0,
-    text: 'learn',
-    completed: false
-  }];
-
-  deepFreeze(before);
-  deepFreeze(action);
-
-  expect (
-    todos(before, action)
-    )
-    .toEqual(after);
-};
-
-testTodos();
 
 
 const testToggleTodo = () => {
@@ -144,6 +132,33 @@ render();
 
 // --------test
 
+const testTodos = () => {
+  const before = [];
+
+  const action = {
+    type: 'ADD_TODO',
+    id: 0,
+    text: 'learn'
+    
+  }
+
+  const after = [
+  {
+    id: 0,
+    text: 'learn',
+    completed: false
+  }];
+
+  deepFreeze(before);
+  deepFreeze(action);
+
+  expect (
+    todos(before, action)
+    )
+    .toEqual(after);
+};
+
+testTodos();
 
 const testCounter = () => {
   const before = 0;
