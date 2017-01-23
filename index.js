@@ -16,24 +16,34 @@ const visibilityFilter = (state = 'SHOW_ALL', action) => {
 
 }
 
-const todos = (state = [], action) => {
+const todo = (state , action) => {
   switch (action.type) {
     case 'ADD_TODO' :
-      return [...state, {
+      return {
         id: action.id,
         text: action.text,
         completed: false
-      }];
+      };
       case 'TOGGLE_TODO' :
-        return state.map(todo => {
-          if (action.id !== todo.id) {
-            return todo;
-          }
-          return {
-            ...todo,
-            completed : !todo.completed
-          };
-        });
+        if (action.id !== state.id) {
+          return state;
+        }
+        return {
+          ...state,
+          completed : !state.completed
+        };
+
+    default:
+      return state;
+  }
+}
+
+const todos = (state = [], action) => {
+  switch (action.type) {
+    case 'ADD_TODO' :
+      return [...state, todo(undefined, action)];
+      case 'TOGGLE_TODO' :
+        return state.map(t => { return todo(t, action)});
     default:
       return state;
   }
