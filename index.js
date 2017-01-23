@@ -12,7 +12,7 @@ const visibilityFilter = (state = 'SHOW_ALL', action) => {
 
     default:
       return state;
-  } 
+  }
 
 }
 
@@ -46,46 +46,6 @@ const todoApp = combineReducers ({
 
 
 
-const testToggleTodo = () => {
-  const before = [{
-    completed: false,
-    id: 0,
-    text: "foo"
-  },{
-    completed: false,
-    id: 1,
-    text: "bar"
-
-  }];
-
-  const action = {
-    type: 'TOGGLE_TODO',
-    id: 1
-  };
-
-  const after = [{
-    completed: false,
-    id: 0,
-    text: "foo"
-  },{
-    completed: true,
-    id: 1,
-    text: "bar"
-
-  }];
-
-
-  deepFreeze(before);
-  deepFreeze(action);
-
-  expect (
-    todos(before, action)
-    )
-    .toEqual(after);
-};
-
-testToggleTodo();
-
 
 
 const store = createStore(todoApp);
@@ -93,7 +53,7 @@ const store = createStore(todoApp);
 let nextTodoId = 0;
 class TodoApp extends Component {
   render() {
-    // const liStyle =
+
     return (
       <div>
         <input ref={node => {
@@ -110,11 +70,13 @@ class TodoApp extends Component {
           AddTodo
           </button>
           <ul>
-            {this.props.todos.map(todo =>
+            {this.props.todos.filter(todo => {
+              return ((!todo.completed && this.props.filter!=='SHOW_COMPLETED') || (todo.completed && this.props.filter!=='SHOW_IN_PROGRESS'))
+            }).map(todo =>
               <li
                 style={
                   {
-      textDecoration: (todo.completed) ? 'line-through' : ''
+      textDecoration: (todo.completed) ? 'line-through' : '',
     }
                 }
                 key={todo.id}
@@ -129,17 +91,35 @@ class TodoApp extends Component {
               </li>
               )}
           </ul>
+          <FilterLink text='Show All' filter='SHOW_ALL'  />
+          <br />
+          <FilterLink text='Show in progress' filter='SHOW_IN_PROGRESS'/>
+          <br />
+          <FilterLink text='Show completed' filter='SHOW_COMPLETED'/>
       </div>
       );
   }
 }
 
+const FilterLink = ({text, filter}) => (
+  <a
+    href="#"
+    onClick={ (e) => {
+      e.preventDefault();
+      store.dispatch({
+        type: 'SET_VISIBILITY_FILTER',
+        filter: filter
+      })
+    }}
+  >{text}</a>
+);
 
 
 const render = () => {
   ReactDOM.render(
     <TodoApp
       todos= {store.getState().todos}
+      filter = {store.getState().visibilityFilter}
 
     />,
   document.getElementById('root')
@@ -185,6 +165,46 @@ const testTodos = () => {
 testTodos();
 
 
+
+const testToggleTodo = () => {
+  const before = [{
+    completed: false,
+    id: 0,
+    text: "foo"
+  },{
+    completed: false,
+    id: 1,
+    text: "bar"
+
+  }];
+
+  const action = {
+    type: 'TOGGLE_TODO',
+    id: 1
+  };
+
+  const after = [{
+    completed: false,
+    id: 0,
+    text: "foo"
+  },{
+    completed: true,
+    id: 1,
+    text: "bar"
+
+  }];
+
+
+  deepFreeze(before);
+  deepFreeze(action);
+
+  expect (
+    todos(before, action)
+    )
+    .toEqual(after);
+};
+
+testToggleTodo();
 
 
 
