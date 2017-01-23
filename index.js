@@ -5,6 +5,7 @@ import deepFreeze from 'deep-freeze';
 import { createStore } from 'redux';
 
 
+
 const todos = (state = [], action) => {
   switch (action.type) {
     case 'ADD_TODO' :
@@ -13,6 +14,16 @@ const todos = (state = [], action) => {
         text: action.text,
         completed: false
       }];
+      case 'TOGGLE_TODO' : 
+        return state.map(todo => {
+          if (action.id !== todo.id) {
+            return todo;
+          }
+          return {
+            ...todo,
+            completed : !todo.completed
+          };
+        });
     default:
       return state;
   }
@@ -47,6 +58,45 @@ const testTodos = () => {
 testTodos();
 
 
+const testToggleTodo = () => {
+  const before = [{
+    completed: false,
+    id: 0,
+    text: "foo"
+  },{
+    completed: false,
+    id: 1,
+    text: "bar"
+
+  }];
+
+  const action = {
+    type: 'TOGGLE_TODO',
+    id: 1
+  };
+
+  const after = [{
+    completed: false,
+    id: 0,
+    text: "foo"
+  },{
+    completed: true,
+    id: 1,
+    text: "bar"
+
+  }];
+
+
+  deepFreeze(before);
+  deepFreeze(action);
+
+  expect (
+    todos(before, action)
+    )
+    .toEqual(after);
+};
+
+testToggleTodo();
 
 //ignore everything belo
 
