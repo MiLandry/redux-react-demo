@@ -88,6 +88,26 @@ const TodoList = ({
   </ul>
 )
 
+const AddTodo = ({
+  onClick
+}) => {
+  let input;
+
+return (
+<div>
+    <input ref={node => {
+    input = node;
+  }} />
+  <button onClick={() => {
+    onClick(input);
+    input.value = '';
+  }}>
+    AddTodo
+    </button>
+</div>
+)
+}
+
 const store = createStore(todoApp);
 
 let nextTodoId = 0;
@@ -99,19 +119,13 @@ class TodoApp extends Component {
 
     return (
       <div>
-        <input ref={node => {
-          this.input = node;
-        }} />
-        <button onClick={() => {
-          store.dispatch({
-            type: 'ADD_TODO',
-            text: this.input.value,
-            id: nextTodoId++
-          });
-          this.input.value = '';
-        }}>
-          AddTodo
-          </button>
+      <AddTodo
+      onClick= { (input) =>
+    store.dispatch({
+      type: 'ADD_TODO',
+      text: input.value,
+      id: nextTodoId++
+    })}/>
           <TodoList
             todos = {visibleTodos}
             onTodoClick = { (id) => {
