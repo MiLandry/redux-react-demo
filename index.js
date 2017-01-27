@@ -108,6 +108,60 @@ return (
 )
 }
 
+const Footer = (() => {
+return (
+          <div>
+          <FilterLink children='Show All' filter='SHOW_ALL'  />
+          <br />
+          <FilterLink children='Show in progress' filter='SHOW_IN_PROGRESS'/>
+          <br />
+          <FilterLink children='Show completed' filter='SHOW_COMPLETED'/>
+          </div>
+  )
+});
+
+class FilterLink extends Component {
+  render () {
+    const props = this.props;
+    const state = store.getState();
+    return (
+      <Link
+        active= {
+          props.filter ===
+          state.visibilityFilter
+        }
+        onClick= {() => 
+          store.dispatch({
+          type: 'SET_VISIBILITY_FILTER',
+          filter: props.filter
+        })
+        }
+        >
+        {props.children}
+</Link>
+        );
+  }
+}
+
+const Link = ({
+  active,
+  children,
+  onClick,
+}) => {
+  if (active) {
+    return <span>{children}</span>;
+  }
+
+return (
+  <a
+    href="#"
+    onClick={ (e) => {
+      e.preventDefault();
+      onClick();
+    }}
+  >{children}</a>
+)};
+
 const store = createStore(todoApp);
 
 let nextTodoId = 0;
@@ -135,28 +189,16 @@ class TodoApp extends Component {
               })
             }}
             />
-          <FilterLink text='Show All' filter='SHOW_ALL'  />
-          <br />
-          <FilterLink text='Show in progress' filter='SHOW_IN_PROGRESS'/>
-          <br />
-          <FilterLink text='Show completed' filter='SHOW_COMPLETED'/>
+            <Footer />
+
       </div>
       );
   }
 }
 
-const FilterLink = ({text, filter}) => (
-  <a
-    href="#"
-    onClick={ (e) => {
-      e.preventDefault();
-      store.dispatch({
-        type: 'SET_VISIBILITY_FILTER',
-        filter: filter
-      })
-    }}
-  >{text}</a>
-);
+
+
+
 
 
 const render = () => {
