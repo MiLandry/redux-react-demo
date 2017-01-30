@@ -4,6 +4,15 @@ import React , {Component} from 'react';
 import deepFreeze from 'deep-freeze';
 import { createStore, combineReducers } from 'redux';
 
+const getVisibleTodos = (todos, visibilityFilter) => {
+    return todos.filter(todo => { 
+      return ((!todo.completed && 
+        visibilityFilter!=='SHOW_COMPLETED')
+        ||
+        (todo.completed && 
+            visibilityFilter!=='SHOW_IN_PROGRESS'))
+});
+  }
 
 const visibilityFilter = (state = 'SHOW_ALL', action) => {
   switch (action.type) {
@@ -15,6 +24,7 @@ const visibilityFilter = (state = 'SHOW_ALL', action) => {
   }
 
 }
+
 
 const todo = (state = {} , action) => {
   switch (action.type) {
@@ -74,19 +84,19 @@ const Todo = ({
 
 const TodoList = ({
   todos,
-  onTodoClick
+  onClick
 }) => (
   <ul>
     {todos.map(todo =>
     <Todo
       key={todo.id}
       {...todo}
-      onClick={() => onTodoClick(todo.id)}
+      onClick={() => onClick(todo.id)}
       />
 
       )}
   </ul>
-)
+);
 
 const AddTodo = ({
   onClick
@@ -106,6 +116,39 @@ return (
     </button>
 </div>
 )
+}
+
+class VisibleTodoList extends Component {
+      componentDidMount() {
+      this.unsubscribe = store.subscribe(() =>
+        this.forceUpdate()
+        );
+    }
+    componentWillUnmount() {
+      this.unsubscribe();
+    }
+
+  render() {
+    const props = this.props;
+    const state = store.getState();
+
+    return (
+      <TodoList 
+        todos={
+          getVisibleTodos(
+            state.todos,
+            state.visibilityFilter
+            )
+        }
+        onClick={ id =>
+          store.dispatch({
+            type: 'TOGGLE_TODO',
+            id
+          })
+        }
+      />
+        )
+  }
 }
 
 const Footer = (() => {
@@ -175,9 +218,6 @@ const store = createStore(todoApp);
 let nextTodoId = 0;
 class TodoApp extends Component {
   render() {
-    const visibleTodos = this.props.todos.filter(todo => {
-      return ((!todo.completed && this.props.visibilityFilter!=='SHOW_COMPLETED') || (todo.completed && this.props.visibilityFilter!=='SHOW_IN_PROGRESS'))
-    });
 
     return (
       <div>
@@ -188,15 +228,7 @@ class TodoApp extends Component {
       text: input.value,
       id: nextTodoId++
     })}/>
-          <TodoList
-            todos = {visibleTodos}
-            onTodoClick = { (id) => {
-              store.dispatch({
-                type: 'TOGGLE_TODO',
-                id: id
-              })
-            }}
-            />
+          <VisibleTodoList />
             <Footer />
 
       </div>
@@ -299,6 +331,5 @@ const testToggleTodo = () => {
 };
 
 testToggleTodo();
-
 
 
