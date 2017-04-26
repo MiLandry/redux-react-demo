@@ -8,7 +8,11 @@ import { createStore, combineReducers } from 'redux';
 
 const render = () => {
   ReactDOM.render(
-    <h1>hi</h1>
+    <div>
+    <h1>0</h1>
+    <button>+</button>
+      
+    </div>
 
    ,
   document.getElementById('root')
