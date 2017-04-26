@@ -19,6 +19,7 @@ const render = () => {
     <div>
     <h1>{theCounter}</h1>
     <button onClick={() => store.dispatch({ type: 'INCREMENT'})}>+</button>
+    <button onClick={() => store.dispatch({ type: 'DECREMENT'})}>-</button>
       
     </div>
 
