@@ -1,18 +1,21 @@
-// import React from 'react';
-import chai from 'chai'; // eslint-disable-line import/no-extraneous-dependencies
-// import { shallow } from 'enzyme'; // eslint-disable-line import/no-extraneous-dependencies
-// import sinon from 'sinon'; // eslint-disable-line import/no-extraneous-dependencies
-// import getMuiTheme from 'material-ui/styles/getMuiTheme';
-// import fetchMock from 'fetch-mock'; // eslint-disable-line import/no-extraneous-dependencies
-// import { App } from '../../containers/app';
+
+import chai from 'chai'; 
 import counter from '../../reducers/counter';
 
-console.log('hi');
 
 chai.should();
 
-let foo = counter(1, {type: 'INCREMENT'});
-foo.should.equal(2);
+counter(1, {type: 'INCREMENT'}).should.equal(2);
+counter(5, {type: 'INCREMENT'}).should.equal(6);
+counter(1, {type: 'DECREMENT'}).should.equal(0);
+counter(5, {type: 'DECREMENT'}).should.equal(4);
+
+//test initialization
+counter(undefined, {}).should.equal(0);
+
+//handle unknown type
+counter(4, {type: 'IPSUM_LOREM'}).should.equal(4);
+
 
 
 
