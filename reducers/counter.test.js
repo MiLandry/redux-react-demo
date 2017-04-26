@@ -1,4 +1,0 @@
-function counter(action, state) {
-  
-}
-
