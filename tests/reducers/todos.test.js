@@ -4,6 +4,7 @@ import deepFreeze from 'deep-freeze';
 
 // a model object just for reference, not used
 const myTodo = {
+  id:0,
   text: 'buy milk',
   completed: false
 };
@@ -11,7 +12,7 @@ const myTodo = {
 chai.should();
 
 describe('The Todos reducer', () => {
-  it('can handle ADD_TODO actions', () => {
+  it('can add todos (ADD_TODO action)', () => {
     const stateBefore = [];
     const action = {
       type: 'ADD_TODO',
@@ -28,7 +29,31 @@ describe('The Todos reducer', () => {
     deepFreeze(before);
     deepFreeze(action);
 
-// this assertion is wrong, it needs to check equality by value
+
+    todos(stateBefore, action).should.deep.equal(after);
+    
+  });
+
+  it('can toggle todos (TOGGLE_TODO action)', () => {
+    const stateBefore = [{
+      id:0,
+      text: 'test',
+      completed: false
+    }];
+    const action = {
+      type: 'TOGGLE_TODO',
+      id: 0,
+    };
+    const after = [
+      {id: 0,
+        text: 'test',
+        completed: true
+      }
+    ];
+
+    deepFreeze(before);
+    deepFreeze(action);
+
 
     todos(stateBefore, action).should.deep.equal(after);
     

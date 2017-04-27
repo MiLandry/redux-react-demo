@@ -8,12 +8,19 @@ const todos = (state = [], action) => {
       };
       
       return [...state, todo];
-    // case 'TOGGLE_TODO' :
-    //   let todo = {};
+    case 'TOGGLE_TODO' :
+      debugger;
+      return state.map(todo => {
+        if (todo.id !== action.id) {
+          return todo;
+        }
 
+        return {
+          ...todo,
+          completed: !todo.completed
+        };
+      });
 
-    //   return [...state,
-    //   todo];
     default:
       return state;
   }

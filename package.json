@@ -4,7 +4,9 @@
   "description": "",
   "scripts": {
     "start": "webpack-dev-server --inline --port 2222",
-    "test": "mocha --compilers js:babel-core/register tests/**/*.test.js"
+    "test": "mocha --compilers js:babel-core/register tests/**/*.test.js",
+    "test-dev": "mocha --compilers js:babel-core/register --debug-brk tests/**/*.test.js"
+
   },
   "repository": {
     "type": "git",
