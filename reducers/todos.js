@@ -1,6 +1,5 @@
 import todo from './todo';
 const todos = (state = [], action) => {
-  debugger;
   switch (action.type) {
     case 'ADD_TODO':
       let t = {
