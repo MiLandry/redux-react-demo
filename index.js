@@ -4,22 +4,24 @@ import React , {Component} from 'react';
 import deepFreeze from 'deep-freeze';
 import { createStore, combineReducers } from 'redux';
 import counter from './reducers/counter';
+import todoApp from './reducers/todoApp';
 
-const store = createStore(counter);
+const store = createStore(todoApp);
 
 console.log(store.getState());
-
-store.dispatch({ type: 'INCREMENT'});
 
 
 const render = () => {
   let theCounter = store.getState();
+  let addTodo =() => {
+    store.dispatch({type: 'ADD_TODO'});
+  }
 
   ReactDOM.render(
     <div>
-    <h1>{theCounter}</h1>
-    <button onClick={() => store.dispatch({ type: 'INCREMENT'})}>+</button>
-    <button onClick={() => store.dispatch({ type: 'DECREMENT'})}>-</button>
+    <h1>To do</h1>
+    <button onClick={addTodo}>add todo</button>
+
       
     </div>
 
