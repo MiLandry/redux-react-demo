@@ -1,26 +1,17 @@
+import todo from './todo';
 const todos = (state = [], action) => {
+  debugger;
   switch (action.type) {
     case 'ADD_TODO':
-      let todo = {
+      let t = {
         completed: false,
         id: action.id,
         text: action.text,
       };
       
-      return [...state, todo];
+      return [...state, t];
     case 'TOGGLE_TODO' :
-      debugger;
-      return state.map(todo => {
-        if (todo.id !== action.id) {
-          return todo;
-        }
-
-        return {
-          ...todo,
-          completed: !todo.completed
-        };
-      });
-
+      return state.map(t => todo(t, action));
     default:
       return state;
   }
