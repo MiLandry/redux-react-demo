@@ -6,23 +6,22 @@ import { createStore, combineReducers } from 'redux';
 import counter from './reducers/counter';
 import todoApp from './reducers/todoApp';
 
+import App from './components/App';
+
 const store = createStore(todoApp);
 
 console.log(store.getState());
 
+let todoId = 0;
+
 
 const render = () => {
   let theCounter = store.getState();
-  let addTodo =() => {
-    store.dispatch({type: 'ADD_TODO'});
-  }
+
 
   ReactDOM.render(
     <div>
-    <h1>To do</h1>
-    <button onClick={addTodo}>add todo</button>
-
-      
+      <App todos={store.getState().todos}/>
     </div>
 
    ,
@@ -33,8 +32,6 @@ const render = () => {
 };
 
 
-store.subscribe(() => {
-  render();
-});
+store.subscribe(render);
 
 render();
