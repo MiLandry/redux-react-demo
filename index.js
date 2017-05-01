@@ -7,6 +7,7 @@ import counter from './reducers/counter';
 import todoApp from './reducers/todoApp';
 
 import App from './components/App';
+import Provider from './components/Provider';
 
 const store = createStore(todoApp);
 
@@ -16,12 +17,13 @@ let todoId = 0;
 
 
 const render = () => {
-  let theCounter = store.getState();
 
 
   ReactDOM.render(
     <div>
+    <Provider store={store}>
       <App todos={store.getState().todos}/>
+      </Provider>
     </div>
 
    ,
