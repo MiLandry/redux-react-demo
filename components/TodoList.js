@@ -22,7 +22,10 @@ export default class TodoList extends React.Component {
 
       <ul>
        {this.props.todos.map( todo =>
-        <li key={todo.id}>
+        <li
+          key={todo.id}
+          onClick={() => console.log('click todo ' + todo.id)}
+        >
           {todo.text}
           </li>
           )}

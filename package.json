@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "webpack-dev-server --inline --source-maps --port 2222",
+    "start": "webpack-dev-server --inline --source-maps --port 8080",
     "test": "mocha --compilers js:babel-core/register tests/**/*.test.js",
     "test-dev": "mocha --compilers js:babel-core/register --debug-brk tests/**/*.test.js"
 

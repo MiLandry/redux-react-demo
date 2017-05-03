@@ -13,6 +13,6 @@ then
 `npm start`
 
 then browse to
-http://localhost:2222/
+http://localhost:8080/
 
 Note that live reload is available

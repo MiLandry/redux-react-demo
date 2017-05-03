@@ -8,10 +8,9 @@ export default class App extends React.Component {
   render() {
     const { store } = this.context;
     const addTodo = () => {
-      console.log('sntaoehi');
       store.dispatch({
         type: "ADD_TODO",
-        text: 'test', //this.textInput.value(),
+        text: this.textInput.value,
         id: todoId
       });
       todoId++;
