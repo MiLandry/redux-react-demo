@@ -1,20 +1,10 @@
 import React from "react";
 
 export default class TodoList extends React.Component {
-  constructor() {
-    super();
-    this.name = "Mike";
-    this.state = {
-      clicks: 0
-    };
-    this.increment = this.increment.bind(this);
-  }
 
-  increment() {
-    this.setState({
-      clicks: this.state.clicks + 1
-    });
-  };
+  getVisibleTodos() {
+    return this.props.todos;
+  }
 
   render() {
     const { store } = this.context;

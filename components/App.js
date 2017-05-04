@@ -1,5 +1,6 @@
 import React from "react";
 import TodoList from "./TodoList";
+import FilterLinks from "../containers/FilterLinks";
 
 let todoId = 0;
 
@@ -22,6 +23,7 @@ export default class App extends React.Component {
         <h1>My Todo List</h1>
         <input ref={input => (this.textInput = input)} />
         <button onClick={addTodo}>add todo</button>
+        <FilterLinks />
         <TodoList todos={this.props.todos} />
       </div>
     );
