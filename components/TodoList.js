@@ -2,9 +2,6 @@ import React from "react";
 
 export default class TodoList extends React.Component {
 
-  getVisibleTodos() {
-    return this.props.todos;
-  }
 
   render() {
     const { store } = this.context;
@@ -14,11 +11,30 @@ export default class TodoList extends React.Component {
         id: id
       })
     }
+
+      const getVisibleTodos = (todos, filter) => {
+        console.log("filter " + filter);
+        switch (filter) {
+          case "SHOW_ALL":
+            return todos;
+          case "SHOW_COMPLETED":
+            return todos.filter(
+              t => t.completed
+              );
+          case "SHOW_IN_PROGRESS":
+            return todos.filter(
+              t => !t.completed
+              );
+        }
+
+        return this.props.todos;
+      }
+
     return (
       <div>
 
       <ul>
-       {this.props.todos.map( todo =>
+       {getVisibleTodos(this.props.todos, this.props.filter).map( todo =>
         <li
           key={todo.id}
           onClick={() => toggleTodo(todo.id)}
