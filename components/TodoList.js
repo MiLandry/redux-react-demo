@@ -5,6 +5,8 @@ export default class TodoList extends React.Component {
 
   render() {
     const { store } = this.context;
+    console.log(store);
+    console.log(store.getState());
     const toggleTodo = (id) => {
       store.dispatch({
         type: "TOGGLE_TODO",
@@ -13,7 +15,6 @@ export default class TodoList extends React.Component {
     }
 
       const getVisibleTodos = (todos, filter) => {
-        console.log("filter " + filter);
         switch (filter) {
           case "SHOW_ALL":
             return todos;
@@ -27,14 +28,14 @@ export default class TodoList extends React.Component {
               );
         }
 
-        return this.props.todos;
+        return todos;
       }
 
     return (
       <div>
 
       <ul>
-       {getVisibleTodos(this.props.todos, this.props.filter).map( todo =>
+       {getVisibleTodos(store.getState().todos, store.getState().visibilityFilter).map( todo =>
         <li
           key={todo.id}
           onClick={() => toggleTodo(todo.id)}

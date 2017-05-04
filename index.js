@@ -22,7 +22,7 @@ const render = () => {
   ReactDOM.render(
     <div>
     <Provider store={store}>
-      <App todos={store.getState().todos}/>
+      <App />
       </Provider>
     </div>
 

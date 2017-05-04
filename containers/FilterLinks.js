@@ -7,6 +7,7 @@ export default class FilterLinks extends React.Component {
   render() {
     const { store } = this.context;
       const changeFilter = (filter) =>{
+        console.log("filter "+ filter);
         store.dispatch( {
           type: "CHANGE_VISIBILITY_FILTER",
           filter: filter

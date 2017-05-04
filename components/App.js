@@ -24,9 +24,7 @@ export default class App extends React.Component {
         <input ref={input => (this.textInput = input)} />
         <button onClick={addTodo}>add todo</button>
         <FilterLinks />
-        <TodoList
-          todos={this.props.todos}
-          filter={this.props.filter}/>
+        <TodoList />
       </div>
     );
   }
