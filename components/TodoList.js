@@ -17,6 +17,13 @@ export default class TodoList extends React.Component {
   };
 
   render() {
+    const { store } = this.context;
+    const toggleTodo = (id) => {
+      store.dispatch({
+        type: "TOGGLE_TODO",
+        id: id
+      })
+    }
     return (
       <div>
 
@@ -24,7 +31,13 @@ export default class TodoList extends React.Component {
        {this.props.todos.map( todo =>
         <li
           key={todo.id}
-          onClick={() => console.log('click todo ' + todo.id)}
+          onClick={() => toggleTodo(todo.id)}
+          style={{
+            textDecoration:
+              todo.completed ?
+               'line-through':
+               'none'
+          }}
         >
           {todo.text}
           </li>
@@ -36,3 +49,7 @@ export default class TodoList extends React.Component {
     );
   }
 } 
+
+TodoList.contextTypes = {
+  store: React.PropTypes.object
+}

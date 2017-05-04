@@ -13,7 +13,9 @@ export default class App extends React.Component {
         text: this.textInput.value,
         id: todoId
       });
+      console.log("id" + todoId)
       todoId++;
+      this.textInput.value = '';
     };
     return (
       <div>
