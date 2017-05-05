@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import React , {Component} from 'react';
 import deepFreeze from 'deep-freeze';
 import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
 import counter from './reducers/counter';
 import todoApp from './reducers/todoApp';
 
 import App from './components/App';
-import Provider from './components/Provider';
 
 const store = createStore(todoApp);
 

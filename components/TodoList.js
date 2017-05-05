@@ -1,12 +1,11 @@
 import React from "react";
+import Todo from './Todo';
 
 export default class TodoList extends React.Component {
 
 
   render() {
     const { store } = this.context;
-    console.log(store);
-    console.log(store.getState());
     const toggleTodo = (id) => {
       store.dispatch({
         type: "TOGGLE_TODO",
@@ -36,19 +35,14 @@ export default class TodoList extends React.Component {
 
       <ul>
        {getVisibleTodos(store.getState().todos, store.getState().visibilityFilter).map( todo =>
-        <li
+        <Todo
+          onClick={() =>{ toggleTodo(todo.id)}}
+          completed={todo.completed}
+          text={todo.text}
+          id={todo.id}
           key={todo.id}
-          onClick={() => toggleTodo(todo.id)}
-          style={{
-            textDecoration:
-              todo.completed ?
-               'line-through':
-               'none'
-          }}
-        >
-          {todo.text}
-          </li>
-          )}
+        />
+        )}
       </ul>
 
 
