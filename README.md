@@ -5,6 +5,8 @@ its not going to use express, I don"t want to set up views
 Its going to use webpack-dev-server
 Webpack-dev-server just serves all the files statically. browser just hits machine root, that serves index.html, which bootstraps to bundle.js
 
+this is the todo app
+
 
 ## getting started
 build the project
