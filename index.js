@@ -19,15 +19,15 @@ let todoId = 0;
 const render = () => {
 
 
-  ReactDOM.render(
-    <div>
-    <Provider store={store}>
-      <App />
-      </Provider>
-    </div>
+    ReactDOM.render(
+        <div>
+            <Provider store={store}>
+                <App />
+            </Provider>
+        </div>
 
-   ,
-  document.getElementById('root')
+        ,
+        document.getElementById('root')
     );
 
 

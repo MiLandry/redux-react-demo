@@ -1,19 +1,19 @@
 import todo from './todo';
 const todos = (state = [], action) => {
-  switch (action.type) {
+    switch (action.type) {
     case 'ADD_TODO':
-      let t = {
-        completed: false,
-        id: action.id,
-        text: action.text,
-      };
+        let t = {
+            completed: false,
+            id: action.id,
+            text: action.text,
+        };
       
-      return [...state, t];
+        return [...state, t];
     case 'TOGGLE_TODO' :
-      return state.map(t => todo(t, action));
+        return state.map(t => todo(t, action));
     default:
-      return state;
-  }
-}
+        return state;
+    }
+};
 
 export default todos;
