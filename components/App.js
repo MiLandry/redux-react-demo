@@ -1,5 +1,6 @@
 import React from "react";
 import TodoList from "./TodoList";
+import AddTodo from "./AddTodo";
 import FilterLinks from "../containers/FilterLinks";
 
 let todoId = 0;
@@ -20,9 +21,16 @@ export default class App extends React.Component {
     };
     return (
       <div>
+        <AddTodo
+          onAddClick={ text => {
+            store.dispatch({
+              type: 'ADD_TODO',
+              id: nextTodoId++,
+              text
+            })
+          }}
+        />
         <h1>My Todo List</h1>
-        <input ref={input => (this.textInput = input)} />
-        <button onClick={addTodo}>add todo</button>
         <FilterLinks />
         <TodoList />
       </div>
