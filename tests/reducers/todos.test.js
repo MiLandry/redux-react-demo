@@ -2,13 +2,6 @@ import chai from 'chai';
 import todos from '../../reducers/todos';
 import deepFreeze from 'deep-freeze';
 
-// a model object just for reference, not used
-const myTodo = {
-    id:0,
-    text: 'buy milk',
-    completed: false
-};
-
 chai.should();
 
 describe('The Todos reducer', () => {
@@ -26,7 +19,7 @@ describe('The Todos reducer', () => {
             }
         ];
 
-        deepFreeze(before);
+        deepFreeze(stateBefore);
         deepFreeze(action);
 
 
@@ -51,7 +44,7 @@ describe('The Todos reducer', () => {
             }
         ];
 
-        deepFreeze(before);
+        deepFreeze(stateBefore);
         deepFreeze(action);
 
 
@@ -59,13 +52,3 @@ describe('The Todos reducer', () => {
     
     });
 });
-
-/*
-
-//test initialization
-todos(undefined, {}).should.equal([]);
-
-//handle unknown type
-todos([, {type: 'IPSUM_LOREM'}).should.equal(4);
-
-*/

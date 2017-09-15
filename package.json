@@ -6,7 +6,8 @@
     "start": "webpack-dev-server --inline --source-maps --port 8080",
     "test": "mocha --compilers js:babel-core/register tests/**/*.test.js",
     "test-dev": "mocha --compilers js:babel-core/register --debug-brk tests/**/*.test.js",
-    "lintAll": "./node_modules/.bin/eslint *",
+    "lintAll": "./node_modules/.bin/eslint --ext=.js src tests",
+    "lintAllFix": "./node_modules/.bin/eslint --ext=.js src tests --fix",
     "lint": "./node_modules/.bin/eslint"
   },
   "repository": {
@@ -36,6 +37,7 @@
     "babel-preset-react": "^6.16.0",
     "chai": "^3.5.0",
     "eslint": "^4.6.1",
+    "eslint-plugin-jasmine": "^2.8.4",
     "eslint-plugin-react": "^7.3.0",
     "mocha": "^3.3.0",
     "webpack": "^1.14.0",
