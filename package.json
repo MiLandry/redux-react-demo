@@ -6,8 +6,8 @@
     "start": "webpack-dev-server --inline --source-maps --port 8080",
     "test": "mocha --compilers js:babel-core/register tests/**/*.test.js",
     "test-dev": "mocha --compilers js:babel-core/register --debug-brk tests/**/*.test.js",
-    "lintAll": "./node_modules/.bin/eslint --ext=.js src tests",
-    "lintAllFix": "./node_modules/.bin/eslint --ext=.js src tests --fix",
+    "lintAll": "./node_modules/.bin/eslint --ext=.js index.js src tests",
+    "lintAllFix": "./node_modules/.bin/eslint --ext=.js index.js src tests --fix",
     "lint": "./node_modules/.bin/eslint"
   },
   "repository": {
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/hamsterofdark/redux-demo#readme",
   "dependencies": {
+    "amdefine": "^1.0.1",
     "deep-freeze": "0.0.1",
     "expect": "^1.20.2",
     "react": "^15.4.1",
