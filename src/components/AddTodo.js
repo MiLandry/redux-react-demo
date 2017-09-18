@@ -1,13 +1,13 @@
-import React from 'react';
+import React from 'react'
 
 const AddTodo = ({ onAddClick }) => {
-  let input;
+  let input
 
   return (
     <div>
-      <input ref={node => {input = node;}} />
+      <input ref={node => {input = node}} />
       <button onClick={onAddClick(input.value)}>Add Todo</button>
     </div>
-  );
-};
-export default AddTodo;
+  )
+}
+export default AddTodo

@@ -1,19 +1,19 @@
-import chai from 'chai'; 
-import counter from '../../reducers/counter';
+import chai from 'chai' 
+import counter from '../../reducers/counter'
 
 
-chai.should();
+chai.should()
 
-counter(1, {type: 'INCREMENT'}).should.equal(2);
-counter(5, {type: 'INCREMENT'}).should.equal(6);
-counter(1, {type: 'DECREMENT'}).should.equal(0);
-counter(5, {type: 'DECREMENT'}).should.equal(4);
+counter(1, {type: 'INCREMENT'}).should.equal(2)
+counter(5, {type: 'INCREMENT'}).should.equal(6)
+counter(1, {type: 'DECREMENT'}).should.equal(0)
+counter(5, {type: 'DECREMENT'}).should.equal(4)
 
 //test initialization
-counter(undefined, {}).should.equal(0);
+counter(undefined, {}).should.equal(0)
 
 //handle unknown type
-counter(4, {type: 'IPSUM_LOREM'}).should.equal(4);
+counter(4, {type: 'IPSUM_LOREM'}).should.equal(4)
 
 
 

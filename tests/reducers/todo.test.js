@@ -1,9 +1,9 @@
-import chai from 'chai'; 
-import todo from '../../reducers/todo';
-import deepFreeze from 'deep-freeze';
+import chai from 'chai' 
+import todo from '../../reducers/todo'
+import deepFreeze from 'deep-freeze'
 
 
-chai.should();
+chai.should()
 
 describe('The Todo reducer', () => {
 
@@ -13,23 +13,23 @@ describe('The Todo reducer', () => {
       id:0,
       text: 'test',
       completed: false
-    };
+    }
     const action = {
       type: 'TOGGLE_TODO',
       id: 0,
-    };
+    }
     const after = 
       {id: 0,
         text: 'test',
         completed: true
       }
-   ;
+   
 
-    deepFreeze(before);
-    deepFreeze(action);
+    deepFreeze(before)
+    deepFreeze(action)
 
 
-    todo(before, action).should.deep.equal(after);
+    todo(before, action).should.deep.equal(after)
     
-  });
-});
+  })
+})

@@ -31,7 +31,7 @@
         ],
         "semi": [
             "error",
-            "always"
+            "never"
         ],
         "react/jsx-uses-vars": [2],
         "react/jsx-uses-react": [2],

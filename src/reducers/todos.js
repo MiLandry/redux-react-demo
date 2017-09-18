@@ -1,4 +1,4 @@
-import todo from './todo';
+import todo from './todo'
 const todos = (state = [], action) => {
   switch (action.type) {
   case 'ADD_TODO':{
@@ -7,15 +7,15 @@ const todos = (state = [], action) => {
       completed: false,
       id: action.id,
       text: action.text,
-    }; 
-    return [...state, t];
+    } 
+    return [...state, t]
   }
   case 'TOGGLE_TODO' : {
-    return state.map(t => todo(t, action));
+    return state.map(t => todo(t, action))
   }
   default:
-    return state;
+    return state
   }
-};
+}
 
-export default todos;
+export default todos

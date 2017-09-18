@@ -1,11 +1,11 @@
-import ReactDOM from 'react-dom';
-import React from 'react';
-import { createStore, combineReducers } from 'redux';
-import { Provider } from 'react-redux';
-import todoApp from './src/reducers/todoApp';
-import App from './src/components/App';
+import ReactDOM from 'react-dom'
+import React from 'react'
+import { createStore, combineReducers } from 'redux'
+import { Provider } from 'react-redux'
+import todoApp from './src/reducers/todoApp'
+import App from './src/components/App'
 
-const store = createStore(todoApp);
+const store = createStore(todoApp)
 
 const render = () => {
 
@@ -18,9 +18,9 @@ const render = () => {
 
     ,
     document.getElementById('root')
-  );
-};
+  )
+}
 
-store.subscribe(render);
+store.subscribe(render)
 
-render();
+render()

@@ -1,20 +1,22 @@
-import React from 'react';
+import React from 'react'
 
-const FilterLink = ({onClick, text}) => (
-  <a
-    href='#'
-    onClick={(e) => {
-      e.preventDefault();
-      onClick();
-    }}
-  >
-    {text}
-  </a>
-);
+const FilterLink = ({filter, text, currentFilter, onClick}) => {
+  if (filter === currentFilter) {
+    return (<span> {filter} </span>)
+  }
 
-FilterLink.propTypes = {
-  onClick: React.PropTypes.func
-};
+  return (
+    <a
+      href='#'
+      onClick={(e) => {
+        e.preventDefault()
+        onClick(filter)
+      }}
+    >
+      {text}
+    </a>
+  )
+}
 
 
-export default FilterLink;
+export default FilterLink

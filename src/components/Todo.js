@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const Todo = ({ onClick, completed, text}) => (
   <li
@@ -7,7 +7,7 @@ const Todo = ({ onClick, completed, text}) => (
   >
     {text}
   </li>
-);
+)
 
 
-export default Todo;
+export default Todo
