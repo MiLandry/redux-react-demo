@@ -18,3 +18,10 @@ then browse to
 http://localhost:8080/
 
 Note that live reload is available
+
+
+
+code
+
+http://jsbin.com/tujohe/edit?html,js,output
+

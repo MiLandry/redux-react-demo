@@ -1,33 +1,27 @@
 import React from 'react'
 
-const Footer = (visibilityFilter, onFilterClick) => (
+const Footer = () => (
   <p>
-    show: 
-    <div>
-      <FilterLink
-        filter='SHOW_ALL'
-        onClick={onFilterClick}
-        text="show all"
-        currentFilter={visibilityFilter}
-      />
-      <br />
-      <FilterLink
-        filter='SHOW_COMPLETED'
-        text="show completed"
-        onClick={onFilterClick}
-        currentFilter={visibilityFilter}
-      />
-      <br />
-      <FilterLink
-        filter='SHOW_IN_PROGRESS'
-        text="show in progress"
-        onClick={onFilterClick}
-        currentFilter={visibilityFilter}
-      />
-    </div>
+        Show:
+    {' '}
+    <FilterLink
+      filter='SHOW_ALL'
+    >
+            All
+    </FilterLink>
+    {' '}
+    <FilterLink
+      filter='SHOW_ACTIVE'
+    >
+            Active
+    </FilterLink>
+    {' '}
+    <FilterLink
+      filter='SHOW_COMPLETED'
+    >
+            Completed
+    </FilterLink>
   </p>
-
 )
-
 
 export default Footer

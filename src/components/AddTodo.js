@@ -1,13 +1,21 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-const AddTodo = ({ onAddClick }) => {
-  let input
+let AddTodo = ({ dispatch }) => {
+    let input;
+    return (
+        <div>
+            <input ref={ node => {
+                input = node
+            }} />
+            <button onClick={()=>{
+                dispatch(addTodo(input.value))
+                input.value = '';
+            }}>
+            Add Todo
+            </button>
+        </div>
+    );
+};
 
-  return (
-    <div>
-      <input ref={node => {input = node}} />
-      <button onClick={onAddClick(input.value)}>Add Todo</button>
-    </div>
-  )
-}
-export default AddTodo
+export connect()(AddTodo);

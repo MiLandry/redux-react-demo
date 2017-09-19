@@ -1,9 +1,14 @@
-const { createStore } = Redux;
+import React from 'react'
 
-ReactDOM.render(
-    <Provider store={createStore(todoApp)}>
-        <TodoApp />
-    </Provider>,
-    document.getElementById('root')
-);
+const App = () => (
+  <div>
+    <AddTodo />
+    <VisbilityTodoList />
+    <Footer />
+  </div>
+)
+
+export default App
+
+
 

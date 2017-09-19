@@ -6,9 +6,9 @@
     "start": "webpack-dev-server --inline --source-maps --port 8080",
     "test": "mocha --compilers js:babel-core/register tests/**/*.test.js",
     "test-dev": "mocha --compilers js:babel-core/register --debug-brk tests/**/*.test.js",
-    "lintAll": "./node_modules/.bin/eslint --ext=.js index.js src tests",
-    "lintAllFix": "./node_modules/.bin/eslint --ext=.js index.js src tests --fix",
-    "lint": "./node_modules/.bin/eslint"
+    "lint": "./node_modules/.bin/eslint --ext=.js index.js src tests",
+    "lintFix": "./node_modules/.bin/eslint --ext=.js index.js src tests --fix",
+    "lintOne": "./node_modules/.bin/eslint"
   },
   "repository": {
     "type": "git",

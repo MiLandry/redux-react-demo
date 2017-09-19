@@ -1,14 +1,19 @@
-class Provider extends Component {
-    getChildContext() {
-        return {
-            store : this.props.store
-        };
-    }
-    render () {
-        return this.props.children;
-    }
-};
+// import { Component, React } from 'react'
 
-Provider.childContextTypes = {
-    store : React.PropTypes.object
-};
+// class Provider extends Component {
+//   getChildContext() {
+//     return {
+//       store : this.props.store
+//     }
+//   }
+//   render () {
+//     return this.props.children
+//   }
+// }
+
+// Provider.childContextTypes = {
+//   store : React.PropTypes.object
+// }
+
+
+//you don't have to do this, react-redux will do this

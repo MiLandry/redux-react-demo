@@ -1,46 +1,50 @@
 import React from 'react'
-import FilterLink from '../components/FilterLink'
 
-export default class FilterLinks extends React.Component {
+const Link = ({
+  active,
+  children,
+  onClick
+}) => {
+  if (active) {
+    return <span>{children}</span>
+  }
+            
+  return (
+    <a href="#"
+      onClick={(e) => {
+        e.preventDefault()
+        onClick()
+      }}
+    >
+      {children}
+    </a>
+  )
+}
 
-
-  render() {
-    const { store } = this.context
-    const changeFilter = (filter) =>{
-      store.dispatch( {
-        type: 'CHANGE_VISIBILITY_FILTER',
-        filter: filter
-      })
-    }
-    return (
-      <div>
-        <FilterLink 
-          onClick={() => {
-            changeFilter('SHOW_ALL')
-          }}
-          text="show all"
-        />
-        <br />
-        <FilterLink 
-          onClick={() => {
-            changeFilter('SHOW_COMPLETED')
-          }}
-          text="show completed"
-        />
-        <br />
-        <FilterLink 
-          onClick={() => {
-            changeFilter('SHOW_IN_PROGRESS')
-          }}
-          text="show in progress"
-        />
-      </div>
-    )
+const mapStateToLinkProps = (
+  state,
+  ownProps
+) => {
+  return {
+    active : ownProps.filter ===
+        state.visibilityFilter
   }
 }
 
-FilterLinks.contextTypes = {
-  store: React.PropTypes.object
+const mapDispatchToLinkProps = (
+  dispatch,
+  ownProps
+) => {
+  return {
+    onClick : () => {
+      dispatch(
+        setVisibilityFilter(ownProps.filter)
+      )
+    }
+  }
 }
 
-
+export default FilterLink = connect(
+  mapStateToLinkProps,
+  mapDispatchToLinkProps
+)(Link)
