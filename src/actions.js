@@ -8,6 +8,7 @@ const addTodo = (text) => {
 }
 
 const setVisibilityFilter = (filter) => {
+  console.log('filter')
   return {
     type: 'SET_VISIBILITY_FILTER',
     filter
