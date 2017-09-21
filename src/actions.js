@@ -21,7 +21,7 @@ const toggleTodo = (id) => {
   }
 }
 
-export const actions = {
+export {
   addTodo,
   setVisibilityFilter,
   toggleTodo,
