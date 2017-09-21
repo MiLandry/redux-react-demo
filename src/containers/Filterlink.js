@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { setVisibilityFilter } from '/src/actions'
 
 const Link = ({
   active,
@@ -44,7 +46,7 @@ const mapDispatchToLinkProps = (
   }
 }
 
-export default FilterLink = connect(
+export default connect(
   mapStateToLinkProps,
   mapDispatchToLinkProps
 )(Link)

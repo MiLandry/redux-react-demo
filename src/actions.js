@@ -21,8 +21,6 @@ const toggleTodo = (id) => {
   }
 }
 
-
- 
 export const actions = {
   addTodo,
   setVisibilityFilter,
