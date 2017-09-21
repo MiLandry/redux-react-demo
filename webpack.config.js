@@ -1,23 +1,28 @@
+var path = require('path');
+
 module.exports = {
-    entry: ['./index.js'] ,
-    output: {
-        filename: 'bundle.js',
-        sourceMapFilename: 'bundle.js.map',
-    },
-    debug: true,
-    devtool: 'inline-source-map',
-    module: {
+entry: ['./index.js'] ,
+output: {
+    filename: 'bundle.js',
+    sourceMapFilename: 'bundle.js.map',
+},
+debug: true,
+devtool: 'inline-source-map',
+module: {
 
-        loaders: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loader: 'babel-loader'
-            }
-        ]
-    },
+    loaders: [
+        {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader'
+        }
+    ]
+},
 
-    resolve: {
-        extensions: ['', '.js']
-    }
+resolve: {
+    extensions: ['', '.js'],
+    root: [
+        path.resolve('./src')
+    ]
+}
 };

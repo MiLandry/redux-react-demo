@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom'
 import { createStore } from 'Redux'
-import todoApp from 'src/reducers/todoApp'
+import todoApp from 'reducers/todoApp'
 
 ReactDOM.render(
   <Provider store={createStore(todoApp)}>
@@ -8,6 +8,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 )
-
-
-
