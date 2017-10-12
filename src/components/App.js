@@ -7,18 +7,18 @@ import {BrowserRouter as Router, Link, Route } from 'react-router-dom'
 
 const App = () => (
   <Router>
-  <div>
-    
-    <Link to='/todo' >Todo </Link>
-    <Route path='/todo' render={() => (
-      <div>
-        <AddTodo />
-        <VisbilityTodoList />
-        <Footer />
-        <Link to='www.google.com' >hello</Link>
-      </div>
-    )} />
-  </div>
+    <div>
+      <Route exact={true} path='/' render={() => (
+        <Link to='/todo' >Todo </Link>
+      )} />
+      <Route path='/todo' render={() => (
+        <div>
+          <AddTodo />
+          <VisbilityTodoList />
+          <Footer />
+        </div>
+      )} />
+    </div>
   </Router>
 )
 
