@@ -19,9 +19,9 @@ http://localhost:8080/
 
 Note that live reload is available
 
-
-
-code
-
-http://jsbin.com/tujohe/edit?html,js,output
-
+## Concepts explored
+react-router
+redux
+react redux
+linting
+webpack, babel, webpack dev server
