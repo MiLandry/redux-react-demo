@@ -7,7 +7,7 @@ const footerStyle = {
 
 const Footer = () => (
   <p 
-  style={footerStyle}>
+    style={footerStyle}>
         Show:
     {' '}
     <FilterLink
