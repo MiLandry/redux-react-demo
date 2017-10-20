@@ -1,8 +1,13 @@
 import React from 'react'
 import FilterLink from 'containers/FilterLink'
 
+const footerStyle = {
+  backgroundColor: 'red'
+}
+
 const Footer = () => (
-  <p>
+  <p 
+  style={footerStyle}>
         Show:
     {' '}
     <FilterLink

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "webpack-dev-server --inline --source-maps --port 8080",
+    "start": "webpack-dev-server --inline --source-maps --port 9999",
     "test": "mocha --compilers js:babel-core/register tests/**/*.test.js",
     "test-dev": "mocha --compilers js:babel-core/register --debug-brk tests/**/*.test.js",
     "lint": "./node_modules/.bin/eslint --ext=.js index.js src tests",
